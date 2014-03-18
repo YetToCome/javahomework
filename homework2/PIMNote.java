@@ -8,6 +8,7 @@
 class PIMNote extends PIMEntity {
     String text;
     public void fromString(String s) {
+        origin_string = s;
         String[] arr_line = s.split("\\+");
         text = arr_line[0];
         setPriority(arr_line[1]);

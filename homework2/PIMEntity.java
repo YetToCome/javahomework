@@ -7,6 +7,7 @@
 
 public abstract class PIMEntity {
     String Priority; // every kind of item has a priority
+    String origin_string;
 
     // default constructor sets priority to "normal"
     PIMEntity() {
@@ -27,6 +28,9 @@ public abstract class PIMEntity {
         Priority = p;
     }
 
+    public String getOriginString() {
+        return origin_string;
+    }
     // Each PIMEntity needs to be able to set all state information
     // (fields) from a single text string.
     abstract public void fromString(String s);
