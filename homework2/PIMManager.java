@@ -10,13 +10,14 @@ import java.io.*;
 class PIMManager {
     public static ArrayList Pim_Todo = new ArrayList();
     public static ArrayList Pim_Note = new ArrayList();
+    public static ArrayList Pim_Contact = new ArrayList();
     public static void main(String args[]) {
         System.out.println("Welcome to PIM\n---Enter a command (suported commands are List Create Save Load Quit)---");
         Scanner scan = new Scanner(System.in);
         String command = scan.nextLine();
         while (!command.equals("Quit") ) {
             if (command.equals("List")) {
-                String first_line = "There is " + Pim_Todo.size() + Pim_Note.size() + " items";
+                String first_line = "There is " + Pim_Todo.size() + Pim_Note.size() + Pim_Contact.size() + " items";
                 System.out.println(first_line);
                 for (int i = 0; i != Pim_Todo.size(); ++i) {
                     String print_line = "Item " + (i + 1) + " " + Pim_Todo.get(i).toString();
@@ -24,6 +25,10 @@ class PIMManager {
                 }
                 for (int i = 0; i != Pim_Note.size(); ++i) {
                     String print_line = "Item " + (i + 1 + Pim_Todo.size()) + " " + Pim_Note.get(i).toString();
+                    System.out.println(print_line);
+                }
+                for (int i = 0; i != Pim_Contact.size(); ++i) {
+                    String print_line = "Item " + (i + 1 + Pim_Todo.size() + Pim_Note.size()) + " " + Pim_Contact.get(i).toString();
                     System.out.println(print_line);
                 }
             } else if (command.equals("Create")) {
@@ -52,9 +57,22 @@ class PIMManager {
                     final_line += final_scan.nextLine();
                     newPimNote.fromString(final_line);
                     Pim_Note.add(newPimNote);
-                } else if (command.equals("contact")) {
+                } else if (create_string.equals("contact")) {
+                    PIMContact newPimContact = new PIMContact();
+                    String final_line = "";
+                    Scanner final_scan = new Scanner(System.in);
+                    System.out.println("Entry first name");
+                    final_line += final_scan.nextLine() + "+";
+                    System.out.println("Entry last name");
+                    final_line += final_scan.nextLine() + "+";
+                    System.out.println("Entry e-mail address");
+                    final_line += final_scan.nextLine() + "+";
+                    System.out.println("Entry Priority");
+                    final_line += final_scan.nextLine();
+                    newPimContact.fromString(final_line);
+                    Pim_Contact.add(newPimContact);
                     
-                } else if (command.equals("appointment")) {
+                } else if (create_string.equals("appointment")) {
 
                 } else {
                     System.out.println("Wrong Command");
