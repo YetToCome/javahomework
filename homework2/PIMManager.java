@@ -11,6 +11,7 @@ class PIMManager {
     public static ArrayList Pim_Todo = new ArrayList();
     public static ArrayList Pim_Note = new ArrayList();
     public static ArrayList Pim_Contact = new ArrayList();
+    public static ArrayList Pim_Appointment = new ArrayList();
     public static void main(String args[]) {
         System.out.println("Welcome to PIM\n---Enter a command (suported commands are List Create Save Load Quit)---");
         Scanner scan = new Scanner(System.in);
@@ -29,6 +30,10 @@ class PIMManager {
                 }
                 for (int i = 0; i != Pim_Contact.size(); ++i) {
                     String print_line = "Item " + (i + 1 + Pim_Todo.size() + Pim_Note.size()) + " " + Pim_Contact.get(i).toString();
+                    System.out.println(print_line);
+                }
+                for (int i = 0; i != Pim_Appointment.size(); ++i) {
+                    String print_line = "Item " + (i + 1 + Pim_Todo.size() + Pim_Note.size() + Pim_Contact.size()) + " " + Pim_Appointment.get(i).toString();
                     System.out.println(print_line);
                 }
             } else if (command.equals("Create")) {
@@ -73,7 +78,15 @@ class PIMManager {
                     Pim_Contact.add(newPimContact);
                     
                 } else if (create_string.equals("appointment")) {
-
+                    PIMAppointment newPimAppoinement = new PIMAppointment();
+                    String final_line = "";
+                    Scanner final_scan = new Scanner(System.in);
+                    System.out.println("Enter description");
+                    final_line += final_scan.nextLine() + "+";
+                    System.out.println("Enter Priority");
+                    final_line += final_scan.nextLine();
+                    newPimAppoinement.fromString(final_line);
+                    Pim_Appointment.add(newPimAppoinement);
                 } else {
                     System.out.println("Wrong Command");
                 }

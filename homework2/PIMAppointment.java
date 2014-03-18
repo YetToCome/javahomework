@@ -8,9 +8,12 @@
 class PIMAppointment extends PIMEntity {
     String description;
     public void fromString(String s) {
+        String[] arr_line = s.split("\\+");
+        description = arr_line[0];
+        setPriority(arr_line[1]);
 
     }
     public String toString() {
-        return description;
+        return getPriority() + description;
     }
 }
