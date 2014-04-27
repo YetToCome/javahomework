@@ -8,7 +8,7 @@ package my.function;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public abstract class PIMEntity {
     String Priority; // every kind of item has a priority

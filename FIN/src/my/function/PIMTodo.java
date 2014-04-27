@@ -8,10 +8,10 @@ package my.function;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class PIMTodo extends PIMEntity {
-    String data;
+    public String data;
     String text;
     public void fromString(String s) {
         origin_string = s;

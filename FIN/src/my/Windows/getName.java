@@ -8,7 +8,7 @@ package my.Windows;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class getName extends javax.swing.JFrame {
 

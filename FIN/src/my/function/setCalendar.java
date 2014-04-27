@@ -8,7 +8,7 @@ package my.function;
 import java.util.Calendar;
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class setCalendar {
     public static String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};

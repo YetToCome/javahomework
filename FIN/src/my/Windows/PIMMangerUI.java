@@ -14,7 +14,7 @@ import my.function.PIMTodo;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class PIMMangerUI extends javax.swing.JFrame {
 

@@ -8,7 +8,7 @@ package my.function;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class PIMNote extends PIMEntity {
     String text;

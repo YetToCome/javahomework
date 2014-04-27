@@ -8,7 +8,7 @@ package my.function;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class PIMContact extends PIMEntity {
     String first_name, last_name, email_address;

@@ -10,7 +10,7 @@ import my.function.*;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class mainUI extends javax.swing.JFrame {
 

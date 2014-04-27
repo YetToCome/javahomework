@@ -8,7 +8,7 @@ package my.function;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 public class PIMAppointment extends PIMEntity {
     String description;

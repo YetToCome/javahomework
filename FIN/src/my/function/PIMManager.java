@@ -8,7 +8,7 @@ package my.function;
 
 /**
  *
- * @author YetToCome
+ * @author 王佳唯
  */
 import java.util.*;
 import java.io.*;
@@ -62,11 +62,15 @@ public class PIMManager {
     }
     public static void load(ArrayList<PIMTodo> Pim_Todo, ArrayList<PIMNote> Pim_Note, ArrayList<PIMContact> Pim_Contact, ArrayList<PIMAppointment> Pim_Appointment) {
         try {
+                if(Pim_Todo.size() >= 1)
                     Pim_Todo.clear();
+                if (Pim_Note.size() >= 1)
                     Pim_Note.clear();
+                if (Pim_Appointment.size() >= 1)
                     Pim_Appointment.clear();
+                if (Pim_Contact.size() >= 1)
                     Pim_Contact.clear();
-                    File file = new File("1.txt");
+                File file = new File("1.txt");
                     BufferedReader reader = new BufferedReader(new FileReader(file));
                     String line = reader.readLine();
                     while (line != null) {
