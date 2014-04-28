@@ -22,6 +22,7 @@ public class calendar extends javax.swing.JFrame {
     /**
      * Creates new form calendar
      */
+    ArrayList<PIMTodo> public_Pim_Todo;
     ArrayList<PIMTodo> Pim_Todo;
     ArrayList<PIMNote> Pim_Note;
     ArrayList<PIMContact> Pim_Contact;
@@ -29,14 +30,16 @@ public class calendar extends javax.swing.JFrame {
     public calendar() {
         initComponents();
     }
-    public calendar(String SB) {
+    public calendar(String SB, String name) {
         initComponents();
         jTextArea1.setText(SB);
+        public_Pim_Todo = new ArrayList<PIMTodo>();
         Pim_Todo = new ArrayList<PIMTodo>();
         Pim_Note = new ArrayList<PIMNote>();
         Pim_Contact = new ArrayList<PIMContact>();
         Pim_Appointment = new ArrayList<PIMAppointment>();
-        my.function.PIMManager.load(Pim_Todo, Pim_Note, Pim_Contact, Pim_Appointment);
+        my.function.PIMManager.load(name, Pim_Todo, Pim_Note, Pim_Contact, Pim_Appointment);
+        my.function.PIMManager.load_public(name, public_Pim_Todo);
     }
 
     /**
@@ -338,7 +341,14 @@ public class calendar extends javax.swing.JFrame {
             String arr[] = Pim_Todo.get(i).toString().split(" ");
             System.out.println(arr[1]);
             if (arr[1].split("\\/")[0].equals(jComboBox1.getSelectedItem().toString()) && arr[1].split("\\/")[2].equals(jComboBox2.getSelectedItem().toString())) {
-                things += Pim_Todo.get(i).toString() + "\n";
+                things += Pim_Todo.get(i).toString() + "     你自己的~~~" + "\n";
+            }
+        }
+        for (int i = 0; i < public_Pim_Todo.size(); ++i) {
+            String arr[] = public_Pim_Todo.get(i).toString().split(" ");
+            System.out.println(arr[1]);
+            if (arr[1].split("\\/")[0].equals(jComboBox1.getSelectedItem().toString()) && arr[1].split("\\/")[2].equals(jComboBox2.getSelectedItem().toString())) {
+                things += public_Pim_Todo.get(i).toString() + "     共有的~~~" + "\n";
             }
         }
         jTextArea2.setText(things);

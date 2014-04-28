@@ -6,6 +6,7 @@
 
 package my.Windows;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import my.function.PIMAppointment;
 import my.function.PIMContact;
@@ -25,8 +26,17 @@ public class PIMMangerUI extends javax.swing.JFrame {
     ArrayList<PIMNote> Pim_Note;
     ArrayList<PIMContact> Pim_Contact;
     ArrayList<PIMAppointment> Pim_Appointment;
+    String name;
     public PIMMangerUI() {
         initComponents();
+        Pim_Todo = new ArrayList<PIMTodo>();
+        Pim_Note = new ArrayList<PIMNote>();
+        Pim_Contact = new ArrayList<PIMContact>();
+        Pim_Appointment = new ArrayList<PIMAppointment>();
+    }
+    public PIMMangerUI(String yourname) {
+        initComponents();
+        name = yourname;
         Pim_Todo = new ArrayList<PIMTodo>();
         Pim_Note = new ArrayList<PIMNote>();
         Pim_Contact = new ArrayList<PIMContact>();
@@ -52,6 +62,7 @@ public class PIMMangerUI extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         jButton3.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
         jButton3.setText("保存PIM");
@@ -63,6 +74,7 @@ public class PIMMangerUI extends javax.swing.JFrame {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -106,6 +118,14 @@ public class PIMMangerUI extends javax.swing.JFrame {
             }
         });
 
+        jButton7.setFont(new java.awt.Font("微软雅黑", 0, 14)); // NOI18N
+        jButton7.setText("修改PIM");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,7 +135,7 @@ public class PIMMangerUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                         .addComponent(jButton6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -123,12 +143,16 @@ public class PIMMangerUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(142, 142, 142)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton7))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                                .addComponent(jButton5))
-                            .addComponent(jButton2))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton5)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,22 +160,21 @@ public class PIMMangerUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addGap(2, 2, 2)))
+                    .addComponent(jLabel1)
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,12 +193,12 @@ public class PIMMangerUI extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        my.function.PIMManager.save(Pim_Todo, Pim_Note, Pim_Contact, Pim_Appointment);
+        my.function.PIMManager.save(name, Pim_Todo, Pim_Note, Pim_Contact, Pim_Appointment);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
-        my.function.PIMManager.load(Pim_Todo, Pim_Note, Pim_Contact, Pim_Appointment);
+        my.function.PIMManager.load(name, Pim_Todo, Pim_Note, Pim_Contact, Pim_Appointment);
         String SB = my.function.PIMManager.list(Pim_Todo, Pim_Note, Pim_Contact, Pim_Appointment);
         jTextArea1.setText(SB);
     }//GEN-LAST:event_jButton4MouseClicked
@@ -197,6 +220,22 @@ public class PIMMangerUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        try {
+            ProcessBuilder pb = new ProcessBuilder("notepad.exe", "data_" + name + ".txt");
+            pb.redirectErrorStream(true);
+            Process p = pb.start();
+            InputStream is = p.getInputStream();
+            int inInt = -1;
+            while ((inInt = is.read()) != -1) {
+                System.out.print((char)inInt);
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -240,6 +279,7 @@ public class PIMMangerUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

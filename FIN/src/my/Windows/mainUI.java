@@ -17,11 +17,12 @@ public class mainUI extends javax.swing.JFrame {
     /**
      * Creates new form mainUI
      */
+    String name;
     public mainUI() {
         initComponents();
     }
     public mainUI(String yourname) {
-        String name = yourname;
+        name = yourname;
         initComponents();
         jLabel1.setText("你好 " + name);
     }
@@ -112,7 +113,7 @@ public class mainUI extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         String SB = setCalendar.print_cal();
-        calendar cal = new calendar(SB);
+        calendar cal = new calendar(SB, name);
         cal.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -122,7 +123,7 @@ public class mainUI extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        PIMMangerUI PIMUI = new PIMMangerUI();
+        PIMMangerUI PIMUI = new PIMMangerUI(name);
         PIMUI.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton2MouseClicked
 

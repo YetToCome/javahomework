@@ -15,29 +15,37 @@ import java.io.*;
 
 public class PIMManager {
     public static String list(ArrayList<PIMTodo> Pim_Todo, ArrayList<PIMNote> Pim_Note, ArrayList<PIMContact> Pim_Contact, ArrayList<PIMAppointment> Pim_Appointment) {
-        String first_line = "There is " + (Pim_Todo.size() + Pim_Note.size() + Pim_Contact.size() + Pim_Appointment.size())+ " items";
+        String first_line = "现在的项目有 " + (Pim_Todo.size() + Pim_Note.size() + Pim_Contact.size() + Pim_Appointment.size())+ " items";
         //System.out.println(first_line);
         for (int i = 0; i != Pim_Todo.size(); ++i) {
-            String print_line = "Item " + (i + 1) + " " + Pim_Todo.get(i).toString();
+            String print_line = "TODO项目                " + (i + 1) + " " + Pim_Todo.get(i).toString();
             first_line = first_line + "\n" + print_line;
         }
         for (int i = 0; i != Pim_Note.size(); ++i) {
-            String print_line = "Item " + (i + 1 + Pim_Todo.size()) + " " + Pim_Note.get(i).toString();
+            String print_line = "NOTE项目                 " + (i + 1 + Pim_Todo.size()) + " " + Pim_Note.get(i).toString();
             first_line = first_line + "\n" + print_line;
         }
         for (int i = 0; i != Pim_Contact.size(); ++i) {
-            String print_line = "Item " + (i + 1 + Pim_Todo.size() + Pim_Note.size()) + " " + Pim_Contact.get(i).toString();
+            String print_line = "CONTACT项目          " + (i + 1 + Pim_Todo.size() + Pim_Note.size()) + " " + Pim_Contact.get(i).toString();
             first_line = first_line + "\n" + print_line;
         }
         for (int i = 0; i != Pim_Appointment.size(); ++i) {
-            String print_line = "Item " + (i + 1 + Pim_Todo.size() + Pim_Note.size() + Pim_Contact.size()) + " " + Pim_Appointment.get(i).toString();
+            String print_line = "APPOINTMENT项目 " + (i + 1 + Pim_Todo.size() + Pim_Note.size() + Pim_Contact.size()) + " " + Pim_Appointment.get(i).toString();
             first_line = first_line + "\n" + print_line;
         }
         return first_line;
     }
-    public static void save(ArrayList<PIMTodo> Pim_Todo, ArrayList<PIMNote> Pim_Note, ArrayList<PIMContact> Pim_Contact, ArrayList<PIMAppointment> Pim_Appointment) {
+    public static void save_public(PIMTodo Pim_Todo) {
+        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("public.txt", true)))) {
+            String line = "todo|" + Pim_Todo.getOriginString();
+            out.println(line+"\n");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void save(String name, ArrayList<PIMTodo> Pim_Todo, ArrayList<PIMNote> Pim_Note, ArrayList<PIMContact> Pim_Contact, ArrayList<PIMAppointment> Pim_Appointment) {
         try {
-                    File file = new File("1.txt");
+                    File file = new File("data_" + name + ".txt");
                     BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                     for (int i = 0; i < Pim_Todo.size(); ++i) {
                         String line = "todo|" + Pim_Todo.get(i).getOriginString();
@@ -60,7 +68,27 @@ public class PIMManager {
                     e.printStackTrace();
                 }
     }
-    public static void load(ArrayList<PIMTodo> Pim_Todo, ArrayList<PIMNote> Pim_Note, ArrayList<PIMContact> Pim_Contact, ArrayList<PIMAppointment> Pim_Appointment) {
+        public static void load_public(String name, ArrayList<PIMTodo> Public_Pim_Todo) {
+        try {
+                Public_Pim_Todo.clear();
+                File file = new File("public.txt");
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line = reader.readLine();
+                while (line != null) {
+                    String[] sp = line.split("\\|");
+                    if (sp[0].equals("todo")) {
+                            PIMTodo newtodo = new PIMTodo();
+                            newtodo.fromString(sp[1]);
+                            Public_Pim_Todo.add(newtodo);
+                        } 
+                        line = reader.readLine();
+                    }
+                    reader.close();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+    }
+    public static void load(String name, ArrayList<PIMTodo> Pim_Todo, ArrayList<PIMNote> Pim_Note, ArrayList<PIMContact> Pim_Contact, ArrayList<PIMAppointment> Pim_Appointment) {
         try {
                 if(Pim_Todo.size() >= 1)
                     Pim_Todo.clear();
@@ -70,7 +98,7 @@ public class PIMManager {
                     Pim_Appointment.clear();
                 if (Pim_Contact.size() >= 1)
                     Pim_Contact.clear();
-                File file = new File("1.txt");
+                File file = new File("data_" + name + ".txt");
                     BufferedReader reader = new BufferedReader(new FileReader(file));
                     String line = reader.readLine();
                     while (line != null) {

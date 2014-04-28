@@ -13,6 +13,8 @@ package my.function;
 public abstract class PIMEntity {
     String Priority; // every kind of item has a priority
     String origin_string;
+    String owner;
+    int shared;
 
     // default constructor sets priority to "normal"
     PIMEntity() {
